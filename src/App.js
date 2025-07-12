@@ -1,11 +1,12 @@
 import "./App.css";
 import Welcom from "./composants/Welcom";
-import React , {useState , useEffect} from "react"
+import React, { useState, useEffect } from "react";
+import useIsOnlineCustomName from "./composants/useIsOnline"
+import { Link } from "react-router-dom";
 function App() {
   //js
   //1
   const name = "9antra";
-
 
   //2
   const element = <h1>Hello </h1>;
@@ -43,8 +44,34 @@ function App() {
   //7
   //const count = 12
 
-  const [count,setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
+  const [namee, setNamee] = useState("");
+
+  const isOnline = useIsOnlineCustomName();
+
+    // useEffect(() => {
+    //   console.log('cette fonction va etre execute la premiere fois et a chaque modification de la variable count ');
+    //   console.log('car le deuxieme argument est count ');
+    //   return () => {
+    //   console. log('cette partie va etre execute pour nettoyer et lors de loperation unmounting ');
+    //   }
+    //   }, [count])
+      
+      // useEffect(() => {
+      // console.log('cette fonction va etre execute une fois seulement ');
+      // console.log('car le deuxieme argument est un tableau vide ');
+      // return () => {
+      // console. log(' cette partie va etre execute seulement lors de loperation unmounting ')
+      // }
+      
+      // }, [])
+      
+      useEffect(() => {
+      console.log(isOnline)
+      console.log('cette fonction va etre execute chaque re-render');
+      console.log('car pas de deuxieme argument passer');
+      });
 
   return (
     <>
@@ -93,8 +120,23 @@ function App() {
           {/* 7 */}
           <Welcom nom="9antra" xyz="9antra" />
 
-          {/* {count}
-          <button>Cliquez ici</button> */}
+          {count}
+          <button
+            onClick={() => {
+              setCount(count + 1);
+            }}
+          >
+            Cliquez ici
+          </button>
+
+          {namee}
+          <input
+            onChange={(e) =>
+              setNamee(() => (e.target.value ))
+            }
+          ></input>
+
+          <Link to="/Welcom">Welcom</Link>
         </div>
       </div>
     </>
